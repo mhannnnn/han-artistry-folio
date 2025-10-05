@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { ArrowDown } from 'lucide-react';
+import WalkingCharacter from './WalkingCharacter';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -56,6 +57,8 @@ const Hero = () => {
       >
         <ArrowDown size={32} />
       </button>
+      
+      <WalkingCharacter />
     </section>
   );
 };
