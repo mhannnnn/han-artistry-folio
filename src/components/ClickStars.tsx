@@ -20,8 +20,8 @@ const ClickStars = () => {
 
       const newStar: Star = {
         id: Date.now() + Math.random(),
-        x: e.clientX,
-        y: e.clientY + window.scrollY, // Account for scroll position
+        x: e.pageX, // Use pageX for exact position including scroll
+        y: e.pageY, // Use pageY for exact position including scroll
         size: randomSize,
       };
 
@@ -33,12 +33,12 @@ const ClickStars = () => {
       }, 1500);
     };
 
-    window.addEventListener('click', handleClick);
-    return () => window.removeEventListener('click', handleClick);
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-50">
+    <div className="pointer-events-none absolute inset-0 z-50" style={{ position: 'absolute', top: 0, left: 0, width: '100%', minHeight: '100vh' }}>
       {stars.map((star) => (
         <img
           key={star.id}
@@ -46,10 +46,10 @@ const ClickStars = () => {
           alt=""
           className="absolute animate-star-pop"
           style={{
-            left: star.x - star.size / 2,
-            top: star.y - star.size / 2,
-            width: star.size,
-            height: star.size,
+            left: `${star.x - star.size / 2}px`,
+            top: `${star.y - star.size / 2}px`,
+            width: `${star.size}px`,
+            height: `${star.size}px`,
             opacity: 0.8,
           }}
         />
